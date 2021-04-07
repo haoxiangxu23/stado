@@ -8,7 +8,7 @@
 
 ## Overview  
 
-&emsp; Present a new action tubelet detection framework, termed as **MovingCenter Detector (MOC-detector)**, by treating an action instance as a trajectory of moving points. MOC-detector is decomposed into three crucial head branches:
+Present a new action tubelet detection framework, termed as **MovingCenter Detector (MOC-detector)**, by treating an action instance as a trajectory of moving points. MOC-detector is decomposed into three crucial head branches:
 
 - (1) **Center Branch** for instance center detection and action recognition.
 - (2) **Movement Branch** for movement estimation at adjacent frames to form moving point trajectories.
@@ -43,8 +43,11 @@ You can follow the instructions in [Visualization.md](readme/Visualization.md) t
 - DLA-34 backbone codes from [CenterNet](https://github.com/xingyizhou/CenterNet).
 
   [MOC LICENSE](https://github.com/MCG-NJU/MOC-Detector/blob/master/LICENSE)
+
   [ACT LICENSE](https://github.com/vkalogeiton/caffe/blob/act-detector/LICENSE)
+  
   [CenterNet LICENSE](https://github.com/xingyizhou/CenterNet/blob/master/LICENSE)
+  
   See more in [NOTICE](NOTICE)
 
   <br/>
