@@ -1,24 +1,13 @@
-# Actions as Moving Points
+# Spatio-Temporal Action Detection with Occlusion
 
-> Pytorch implementation of [Actions as Moving Points](https://arxiv.org/abs/2001.04608) (ECCV 2020).
->
->  View each action instance as a trajectory of moving points.
-
-<br/>
-
-## News & Updates
-
-Jul. 08, 2020 - First release of codes.
-Jul. 24, 2020 - Update ucf-pretrained JHMDB model and speed test codes.
-Aug. 02, 2020 - Update visualization codes. Extract frames from a video and get the detection result (like above gifs).
-Aug. 17, 2020 - Now our visualization supports instance level detection results (reflects video mAP).
-Aug. 23, 2020 - We upload MOC with ResNet-18 in [Backbone](readme/Backbone.md).
+> Pytorch implementation of [Spatio-Temporal Action Detection with Occlusion]()
+> Take [Actions as Moving Points](https://arxiv.org/abs/2001.04608) (MOC) as the backbone.
 
 <br/>
 
-## MOC Detector Overview  
+## Overview  
 
-&emsp; We present a new action tubelet detection framework, termed as **MovingCenter Detector (MOC-detector)**, by treating an action instance as a trajectory of moving points. MOC-detector is decomposed into three crucial head branches:
+&emsp; Present a new action tubelet detection framework, termed as **MovingCenter Detector (MOC-detector)**, by treating an action instance as a trajectory of moving points. MOC-detector is decomposed into three crucial head branches:
 
 - (1) **Center Branch** for instance center detection and action recognition.
 - (2) **Movement Branch** for movement estimation at adjacent frames to form moving point trajectories.
@@ -26,7 +15,7 @@ Aug. 23, 2020 - We upload MOC with ResNet-18 in [Backbone](readme/Backbone.md).
 
 <br/>
 
-## MOC-Detector Usage
+## Usage
 
 ### 1. Installation
 Please refer to [Installation.md](readme/Installation.md) for installation instructions.
@@ -47,10 +36,12 @@ You can follow the instructions in [Visualization.md](readme/Visualization.md) t
 
 ## References
 
+- Backbone codes from [MOC](https://github.com/MCG-NJU/MOC-Detector).
 - Data augmentation codes from [ACT](https://github.com/vkalogeiton/caffe/tree/act-detector).
 - Evaluation codes from [ACT](https://github.com/vkalogeiton/caffe/tree/act-detector).
 - DLA-34 backbone codes from [CenterNet](https://github.com/xingyizhou/CenterNet).
 
+  [MOC LICENSE](https://github.com/MCG-NJU/MOC-Detector/blob/master/LICENSE)
   [ACT LICENSE](https://github.com/vkalogeiton/caffe/blob/act-detector/LICENSE)
   [CenterNet LICENSE](https://github.com/xingyizhou/CenterNet/blob/master/LICENSE)
   See more in [NOTICE](NOTICE)
