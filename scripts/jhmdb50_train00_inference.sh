@@ -1,5 +1,5 @@
 cd data
-mv JHMDB_00 JHMDB
+mv JHMDB_50 JHMDB
 cd ..
 mkdir -p occ_inference_results/occ50_train00_rgb
 mkdir -p occ_inference_results/occ50_train00_flow
