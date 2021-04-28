@@ -79,10 +79,10 @@ class RegL1Loss(torch.nn.Module):
         return loss
 
 # --------------------- added for STADO -----------------------
-class BCELoss(nn.Module):
+class BCELoss(torch.nn.Module):
     def __init__(self):
         super(BCELoss, self).__init__()
-        self.loss = nn.CrossEntropyLoss()
+        self.loss = torch.nn.CrossEntropyLoss()
         
     def forward(self, x, xhat):
         x_ = x.view(-1,1)
