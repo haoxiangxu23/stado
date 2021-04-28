@@ -6,7 +6,6 @@ from __future__ import print_function
 import torch
 from torch import nn
 
-
 def fill_fc_weights(layers):
     for m in layers.modules():
         if isinstance(m, nn.Conv2d):
@@ -47,6 +46,9 @@ class MOC_Branch(nn.Module):
                       padding=0, bias=True))
         fill_fc_weights(self.wh)
 
+        # added for STADO
+        self.mgan = MGAN(branch_info['hm'] + branch_info['wh'])
+
     def forward(self, input_chunk):
         output = {}
         output_wh = []
@@ -57,4 +59,30 @@ class MOC_Branch(nn.Module):
         output['hm'] = self.hm(input_chunk)
         output['mov'] = self.mov(input_chunk)
         output['wh'] = output_wh
+
+        # added for STADO
+        input_chunk = torch.cat([output['hm'], output['wh']], dim=1)
+        output['mgan'] = self.mgan(input_chunk)
+
         return output
+
+
+# --------------------- added for STADO -----------------------
+class MGAN(nn.Module):
+    def __init__(self, in_channels, conv_out_channels=512):
+        super(MGAN, self).__init__()
+        self.convs = nn.ModuleList()
+        self.convs.append(nn.Conv2d(in_channels, conv_out_channels, 3, padding=1))
+        self.convs.append(nn.Conv2d(conv_out_channels, conv_out_channels, 3, padding=1))
+        self.conv_logits = nn.Conv2d(conv_out_channels, 1, 1)
+        self.relu = nn.ReLU(inplace=True)
+
+    def forward(self, x):
+        feat = x
+        for conv in self.convs:
+            x = conv(x)
+            x = self.relu(x)
+        out = self.conv_logits(x).sigmoid() * feat
+        return out
+# -------------------------------------------------------------
+

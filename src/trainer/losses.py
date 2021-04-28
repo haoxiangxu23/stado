@@ -78,6 +78,7 @@ class RegL1Loss(torch.nn.Module):
         loss = loss / (mask.sum() + 1e-4)
         return loss
 
+# --------------------- added for STADO -----------------------
 class BCELoss(nn.Module):
     def __init__(self):
         super(BCELoss, self).__init__()
@@ -89,3 +90,4 @@ class BCELoss(nn.Module):
         xhat_ = xhat.view(-1,1).squeeze(1).long()
 
         return self.loss(x_, xhat_)
+# -------------------------------------------------------------
