@@ -138,6 +138,6 @@ class Sampler(data.Dataset):
                 # mask indicate how many objects in this tube
                 mask[num_objs] = 1
                 num_objs = num_objs + 1
-        result = {'input': data, 'hm': hm, 'mov': mov, 'wh': wh, 'mask': mask, 'index': index, 'index_all': index_all, 'mgna': mgan}
+        result = {'input': data, 'hm': hm, 'mov': mov, 'wh': wh, 'mask': mask, 'index': index, 'index_all': index_all, 'mgan': mgan}
 
         return result
