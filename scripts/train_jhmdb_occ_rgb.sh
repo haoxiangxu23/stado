@@ -23,7 +23,7 @@ mkdir -p $train_path
 
 python3 train.py --K 7 --exp_id train_occ25_s1 --dataset hmdb --split 1 --auto_stop \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --rgb_model $train_path \
---lr 5e-4 --lr_step 8,16 --num_epochs 20
+--lr 5e-4 --lr_step 8,16 --num_epochs 30
 
 cd $data_path
 mv "$target_data" "$origin_data"
