@@ -47,23 +47,23 @@ class MOC_Branch(nn.Module):
         fill_fc_weights(self.wh)
 
         # added for STADO
-        self.mgan = MGAN(branch_info['hm'] + branch_info['wh'])
+        self.mgan = MGAN(input_channel)
+        fill_fc_weights(self.mgan)
 
     def forward(self, input_chunk):
         output = {}
+
         output_wh = []
+        output_mgan = []
         for feature in input_chunk:
             output_wh.append(self.wh(feature))
+            output_mgan.append(self.mgan(feature))
+        output['wh'] = torch.cat(output_wh, dim=1)
+        output['mgan'] = torch.cat(output_mgan, dim=1)
+
         input_chunk = torch.cat(input_chunk, dim=1)
-        output_wh = torch.cat(output_wh, dim=1)
         output['hm'] = self.hm(input_chunk)
         output['mov'] = self.mov(input_chunk)
-        output['wh'] = output_wh
-
-        # added for STADO
-        input_chunk = torch.cat([output['hm'], output['wh']], dim=1)
-        output['mgan'] = self.mgan(input_chunk)
-
         return output
 
 
