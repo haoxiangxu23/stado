@@ -132,6 +132,7 @@ class Sampler(data.Dataset):
                     # index_all are all frame's bbox center position
                     index_all[num_objs, i * 2: i * 2 + 2] = center_all_int[1] * output_w + center_all_int[0], center_all_int[1] * output_w + center_all_int[0]
                     x1, x2, y1, y2 = gt_bbox[ilabel][itube][i]
+                    x1, x2, y1, y2 = int(x1), int(x2), int(x3), int(x4)
                     mgan[i, y1:y2, x1:x2] = 1
                 # index is key frame's boox center position
                 index[num_objs] = center_int[1] * output_w + center_int[0]
