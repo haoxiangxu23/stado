@@ -77,3 +77,15 @@ class RegL1Loss(torch.nn.Module):
         loss = F.l1_loss(pred * mask, target * mask, size_average=False)
         loss = loss / (mask.sum() + 1e-4)
         return loss
+
+class BCELoss(nn.Module):
+    def __init__(self):
+        super(BCELoss, self).__init__()
+        self.loss = nn.CrossEntropyLoss()
+        
+    def forward(self, x, xhat):
+        x_ = x.view(-1,1)
+        x_ = torch.cat((x_, 1-x_), dim=1)
+        xhat_ = xhat.view(-1,1).squeeze(1).long()
+
+        return self.loss(x_, xhat_)
