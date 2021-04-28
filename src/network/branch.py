@@ -59,7 +59,8 @@ class MOC_Branch(nn.Module):
         output_mgan = []
         for k, feature in enumerate(input_chunk):
             output_mgan.append(self.mgan(feature))
-            input_chunk[k] = feature * output_mgan[-1].expand_as(feature) # (B, 1, H, W) expand to (B, input_channel, H, W)
+            # (B, 1, H, W) expand to (B, input_channel, H, W)
+            input_chunk[k] = feature * output_mgan[-1].expand_as(feature)
         output['mgan'] = torch.cat(output_mgan, dim=1)
 
         output_wh = []
