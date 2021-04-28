@@ -94,6 +94,8 @@ class opts(object):
                                  help='loss weight for moving offsets.')
         self.parser.add_argument('--wh_weight', type=float, default=0.1,
                                  help='loss weight for bbox regression.')
+        self.parser.add_argument('--mgan_weight', type=float, default=0.5,
+                                 help='loss weight for MGAN.')
 
         # inference settings
         self.parser.add_argument('--redo', action='store_true',
@@ -160,7 +162,10 @@ class opts(object):
 
     def update_dataset(self, opt, dataset):
         opt.num_classes = dataset.num_classes
-        opt.branch_info = {'hm': opt.num_classes,
-                           'mov': 2 * opt.K,
-                           'wh': 2 * opt.K}
+        opt.branch_info = {
+            'hm': opt.num_classes,
+            'mov': 2 * opt.K,
+            'wh': 2 * opt.K,
+            'mgan': 1 * opt.K,
+        }
         return opt
