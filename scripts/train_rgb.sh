@@ -3,7 +3,7 @@
 root_path=$(cd $(dirname $0) && pwd)/..
 data_path=$root_path/data
 src_path=$root_path/src
-train_path=$root_path/result/train/verX_occ25/rgb
+save_dir=$root_path/result/train/verX_occ25/rgb
 origin_data="JHMDB_25"
 target_data="JHMDB"
 
@@ -19,11 +19,11 @@ fi
 mv "$origin_data" "$target_data"
 
 cd $src_path
-mkdir -p $train_path
+mkdir -p $save_dir
 
-python3 train.py --K 7 --exp_id train_occ25_s1 --dataset hmdb --split 1 --auto_stop \
---batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --rgb_model $train_path \
---lr 5e-4 --lr_step 8,16 --num_epochs 30
+python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 8,20 \
+--batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --auto_stop \
+--num_epochs 30 --ninput 1 --rgb_model $save_dir 
 
 cd $data_path
 mv "$target_data" "$origin_data"

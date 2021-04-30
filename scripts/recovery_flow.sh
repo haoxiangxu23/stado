@@ -6,6 +6,7 @@ src_path=$root_path/src
 save_dir=$root_path/result/train/verX_occ25/flow
 origin_data="JHMDB_25"
 target_data="JHMDB"
+model_file=$save_dir/model_last.pth
 
 cd $data_path
 if [ ! -d "$origin_data" ]; then
@@ -19,11 +20,10 @@ fi
 mv "$origin_data" "$target_data"
 
 cd $src_path
-mkdir -p $save_dir
 
 python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 12,20 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --auto_stop \
---num_epochs 30 --ninput 5 --flow_model $save_dir 
+--num_epochs 30 --ninput 5 --flow_model $save_dir --load_model $model_file --start_epoch X
 
 cd $data_path
 mv "$target_data" "$origin_data"
