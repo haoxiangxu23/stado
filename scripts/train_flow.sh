@@ -21,9 +21,9 @@ mv "$origin_data" "$target_data"
 cd $src_path
 mkdir -p $save_dir
 
-python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 12,20 \
---batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --auto_stop \
---num_epochs 30 --ninput 5 --flow_model $save_dir 
+python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 12,20 --ninput 5 \
+--batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --num_epochs 30 \
+--auto_stop --save_all --flow_model $save_dir 
 
 cd $data_path
 mv "$target_data" "$origin_data"
