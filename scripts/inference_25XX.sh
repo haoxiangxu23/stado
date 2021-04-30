@@ -3,12 +3,12 @@
 root_path=$(cd $(dirname $0) && pwd)/..
 data_path=$root_path/data
 src_path=$root_path/src
-model_path_rgb=$root_path/result/train/jhmdb25/rgb/model_best.pth
-model_path_flow=$root_path/result/train/jhmdb25/flow/model_best.pth
-result_path_rgb=$root_path/result/inference/jhmdb25_train25_rgb
-result_path_flow=$root_path/result/inference/jhmdb25_train25_flow
-result_path_both=$root_path/result/inference/jhmdb25_train25_both
-origin_data="JHMDB_25"
+model_path_rgb=$root_path/result/train/verX_occ25/rgb/model_best.pth
+model_path_flow=$root_path/result/train/verX_occ25/flow/model_best.pth
+result_path_rgb=$root_path/result/inference/verX_occXX_rgb
+result_path_flow=$root_path/result/inference/verX_occXX_flow
+result_path_both=$root_path/result/inference/verX_occXX_both
+origin_data="JHMDB_XX"
 target_data="JHMDB"
 
 cd $data_path

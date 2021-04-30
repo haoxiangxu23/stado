@@ -5,10 +5,10 @@ data_path=$root_path/data
 src_path=$root_path/src
 model_path_rgb=$root_path/experiment/result_model/hmdb_s1_dla34_K7_rgb_coco.pth
 model_path_flow=$root_path/experiment/result_model/hmdb_s1_dla34_K7_flow_coco.pth
-result_path_rgb=$root_path/result/inference/jhmdb25_train00_rgb
-result_path_flow=$root_path/result/inference/jhmdb25_train00_flow
-result_path_both=$root_path/result/inference/jhmdb25_train00_both
-origin_data="JHMDB_25"
+result_path_rgb=$root_path/result/inference/infXX_train00_rgb
+result_path_flow=$root_path/result/inference/infXX_train00_flow
+result_path_both=$root_path/result/inference/infXX_train00_both
+origin_data="JHMDB_XX"
 target_data="JHMDB"
 
 cd $data_path
