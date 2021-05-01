@@ -23,7 +23,7 @@ cd $src_path
 
 python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 12,20 --ninput 5 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --num_epochs 30 \
---auto_stop --save_all --flow_model $save_dir --load_model $model_file --start_epoch X
+--auto_stop --flow_model $save_dir --load_model $model_file --start_epoch X
 
 cd $data_path
 mv "$target_data" "$origin_data"
