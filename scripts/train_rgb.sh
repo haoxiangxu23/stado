@@ -23,7 +23,7 @@ mkdir -p $save_dir
 
 python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 8,20 --ninput 1 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --num_epochs 30 \
---auto_stop --rgb_model $save_dir 
+--auto_stop --rgb_model $save_dir  --mgan_weight 5
 
 cd $data_path
 mv "$target_data" "$origin_data"
