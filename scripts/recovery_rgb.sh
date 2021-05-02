@@ -21,7 +21,7 @@ mv "$origin_data" "$target_data"
 
 cd $src_path
 
-python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 10,30 --ninput 1 \
+python3 train.py --dataset hmdb --split 1 --lr 5e-4 --lr_step 10,23 --ninput 1 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --num_epochs 30 \
 --auto_stop --rgb_model $save_dir --load_model $model_file --start_epoch X
 
