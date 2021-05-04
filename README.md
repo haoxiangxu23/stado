@@ -47,5 +47,5 @@ You can follow the instructions in [Train.md](readme/Train.md) to train our mode
   
   [CenterNet LICENSE](https://github.com/xingyizhou/CenterNet/blob/master/LICENSE)
   
-  See more in [NOTICE](NOTICE)
+  See more in [NOTICE](readme/NOTICE)
 
