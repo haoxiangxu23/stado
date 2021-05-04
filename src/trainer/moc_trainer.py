@@ -5,7 +5,7 @@ from __future__ import print_function
 
 import torch
 
-from .losses import FocalLoss, RegL1Loss, ModleWithLoss
+from .losses import FocalLoss, RegL1Loss, BCELoss, ModleWithLoss
 
 from progress.bar import Bar
 from MOC_utils.data_parallel import DataParallel
@@ -18,6 +18,7 @@ class MOCTrainLoss(torch.nn.Module):
         self.crit_hm = FocalLoss()
         self.crit_mov = RegL1Loss()
         self.crit_wh = RegL1Loss()
+        self.crit_mgan = BCELoss()
         self.opt = opt
 
     def forward(self, output, batch):
@@ -32,16 +33,26 @@ class MOCTrainLoss(torch.nn.Module):
         wh_loss = self.crit_wh(output['wh'], batch['mask'],
                                batch['index'], batch['wh'],
                                index_all=batch['index_all'])
+        
+        mgan_loss = self.crit_mgan(output['mgan'], batch['mgan'])
 
-        loss = opt.hm_weight * hm_loss + opt.wh_weight * wh_loss + opt.mov_weight * mov_loss
+        loss = opt.hm_weight * hm_loss + opt.wh_weight * wh_loss + \
+            opt.mov_weight * mov_loss + opt.mgan_weight * mgan_loss
+        
         # MODIFY for pytorch 0.4.0
         loss = loss.unsqueeze(0)
         hm_loss = hm_loss.unsqueeze(0)
         wh_loss = wh_loss.unsqueeze(0)
         mov_loss = mov_loss.unsqueeze(0)
+        mgan_loss = mgan_loss.unsqueeze(0)
 
-        loss_stats = {'loss': loss, 'loss_hm': hm_loss,
-                      'loss_mov': mov_loss, 'loss_wh': wh_loss}
+        loss_stats = {
+            'loss': loss,
+            'loss_hm': hm_loss,
+            'loss_mov': mov_loss,
+            'loss_wh': wh_loss,
+            'loss_mgan': mgan_loss,
+        }
         return loss, loss_stats
 
 
@@ -49,7 +60,7 @@ class MOCTrainer(object):
     def __init__(self, opt, model, optimizer=None):
         self.opt = opt
         self.optimizer = optimizer
-        self.loss_stats = ['loss', 'loss_hm', 'loss_mov', 'loss_wh']
+        self.loss_stats = ['loss', 'loss_hm', 'loss_mov', 'loss_wh', 'loss_mgan']
         self.model_with_loss = ModleWithLoss(model, MOCTrainLoss(opt))
 
     def train(self, epoch, data_loader, writer):

@@ -101,6 +101,7 @@ class Sampler(data.Dataset):
         index = np.zeros((self.max_objs), dtype=np.int64)
         index_all = np.zeros((self.max_objs, K * 2), dtype=np.int64)
         mask = np.zeros((self.max_objs), dtype=np.uint8)
+        mgan = np.zeros((K, output_h, output_w), dtype=np.int64)
 
         num_objs = 0
         for ilabel in gt_bbox:
@@ -130,11 +131,14 @@ class Sampler(data.Dataset):
                         center_int[0],  (gt_bbox[ilabel][itube][i, 1] + gt_bbox[ilabel][itube][i, 3]) / 2 - center_int[1]
                     # index_all are all frame's bbox center position
                     index_all[num_objs, i * 2: i * 2 + 2] = center_all_int[1] * output_w + center_all_int[0], center_all_int[1] * output_w + center_all_int[0]
+                    x1, x2, y1, y2 = gt_bbox[ilabel][itube][i]
+                    x1, x2, y1, y2 = int(x1), int(x2), int(y1), int(y2)
+                    mgan[i, y1:y2, x1:x2] = 1
                 # index is key frame's boox center position
                 index[num_objs] = center_int[1] * output_w + center_int[0]
                 # mask indicate how many objects in this tube
                 mask[num_objs] = 1
                 num_objs = num_objs + 1
-        result = {'input': data, 'hm': hm, 'mov': mov, 'wh': wh, 'mask': mask, 'index': index, 'index_all': index_all}
+        result = {'input': data, 'hm': hm, 'mov': mov, 'wh': wh, 'mask': mask, 'index': index, 'index_all': index_all, 'mgan': mgan}
 
         return result
