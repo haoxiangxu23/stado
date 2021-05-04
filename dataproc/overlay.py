@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-def overlay_transparent(background_img, img_to_overlay_t, x, y, overlay_size=None):
+def overlay_transparent(background_img, img_to_overlay_t, bbox, x, y, overlay_size=None):
     """
     @brief      Overlays a transparant PNG onto another image using CV2
 
@@ -15,6 +15,12 @@ def overlay_transparent(background_img, img_to_overlay_t, x, y, overlay_size=Non
     """
 
     bg_img = background_img.copy()
+    
+    # ground truth background
+    b_h, b_w, _ = bg_img.shape
+    gt = np.full((b_h, b_w, 3), 0, dtype = np.uint8) # black
+    gt_with_bbox = np.full((b_h, b_w, 3), 0, dtype = np.uint8)
+    gt_with_bbox[bbox[1]:bbox[3], bbox[0]:bbox[2]] = 255
 
     if overlay_size is not None:
         img_to_overlay_t = cv2.resize(img_to_overlay_t.copy(), overlay_size)
@@ -29,16 +35,30 @@ def overlay_transparent(background_img, img_to_overlay_t, x, y, overlay_size=Non
     h, w, _ = overlay_color.shape
     roi = bg_img[y:y+h, x:x+w]
 
+    # this is for ground truth
+    occ_white = np.full((h, w, 3), 255, dtype = np.uint8)
+
     # Black-out the area behind the logo in our original ROI
     img1_bg = cv2.bitwise_and(roi.copy(),roi.copy(),mask = cv2.bitwise_not(mask))
 
     # Mask out the logo from the logo image.
     img2_fg = cv2.bitwise_and(overlay_color,overlay_color,mask = mask)
 
+    # ground truth
+    occ_mask = cv2.bitwise_and(occ_white.copy(),occ_white.copy(),mask = cv2.bitwise_not(mask))
+    gt[y:y+h, x:x+w] = occ_mask
+
     # Update the original image with our new ROI
     bg_img[y:y+h, x:x+w] = cv2.add(img1_bg, img2_fg)
 
-    return bg_img
+    gt_with_bbox[y:y+h, x:x+w] = occ_mask
+
+    # cv2.imshow("image", bg_img) 
+    # cv2.imshow("image1", gt) 
+    # cv2.imshow("image2", gt_with_bbox) 
+    # cv2.waitKey(0)
+
+    return bg_img, gt_with_bbox
 
 
 def overlay_flow(background_img, img_to_overlay_t, x, y, overlay_size=None):
