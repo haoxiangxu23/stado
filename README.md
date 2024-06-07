@@ -1,5 +1,5 @@
 # Spatio-Temporal Action Detection with Occlusion
-> Pytorch implementation of CMU11785's course project [Spatio-Temporal Action Detection with Occlusion](https://www.youtube.com/watch?v=6nt8--NZlHI).
+> Link: [Spatio-Temporal Action Detection with Occlusion](https://www.youtube.com/watch?v=6nt8--NZlHI).
 <br/>
 
 ## Overview
