@@ -32,7 +32,7 @@ mkdir -p $result_path_both
 python3 det.py --task normal --dataset hmdb --split 1 --hm_fusion_rgb 0.4 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --flip_test \
 --ninput 1 --rgb_model $model_path_rgb --inference_dir $result_path_rgb
-# fream 
+# frame
 python3 ACT.py --task frameAP --th 0.5 --dataset hmdb --split 1 --inference_dir $result_path_rgb
 # vidio
 python3 ACT.py --task BuildTubes --dataset hmdb --split 1 --inference_dir $result_path_rgb
@@ -46,7 +46,7 @@ python3 ACT.py --task videoAP_all --dataset hmdb --split 1 --inference_dir $resu
 python3 det.py --task normal --dataset hmdb --split 1 --hm_fusion_rgb 0.4 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --flip_test \
 --ninput 5 --flow_model $model_path_flow --inference_dir $result_path_flow
-# fream 
+# frame
 python3 ACT.py --task frameAP --th 0.5 --dataset hmdb --split 1 --inference_dir $result_path_flow
 # vidio
 python3 ACT.py --task BuildTubes --dataset hmdb --split 1 --inference_dir $result_path_flow
@@ -60,7 +60,7 @@ python3 ACT.py --task videoAP_all --dataset hmdb --split 1 --inference_dir $resu
 python3 det.py --task normal --dataset hmdb --split 1 --hm_fusion_rgb 0.4 \
 --batch_size 8 --master_batch 8 --num_workers 4 --gpus 0 --flip_test \
 --ninput 5 --rgb_model $model_path_rgb --flow_model $model_path_flow --inference_dir $result_path_both
-# fream 
+# frame
 python3 ACT.py --task frameAP --th 0.5 --dataset hmdb --split 1 --inference_dir $result_path_both
 # vidio
 python3 ACT.py --task BuildTubes --dataset hmdb --split 1 --inference_dir $result_path_both

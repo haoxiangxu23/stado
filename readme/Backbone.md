@@ -51,6 +51,7 @@ python3 ACT.py --task BuildTubes --K 7 --inference_dir $INFERENCE_DIR
 python3 ACT.py --task videoAP --K 7 --th 0.2 --inference_dir $INFERENCE_DIR
 python3 ACT.py --task videoAP --K 7 --th 0.5 --inference_dir $INFERENCE_DIR
 python3 ACT.py --task videoAP --K 7 --th 0.75 --inference_dir $INFERENCE_DIR
+
 python3 ACT.py --task videoAP_all --K 7 --inference_dir $INFERENCE_DIR
 ```
 

@@ -10,7 +10,7 @@ class opts(object):
     def __init__(self):
         self.parser = argparse.ArgumentParser()
 
-        # basical experiment settings
+        # basic experiment settings
         self.parser.add_argument('--task', default='MOC_train',
                                  help='current task')
         self.parser.add_argument('--exp_id', default='default')
@@ -27,7 +27,7 @@ class opts(object):
         self.parser.add_argument('--ninput', type=int, default=1,
                                  help='length of input, 1 for rgb, 5 for flow by default')
 
-        # model seeting
+        # model setting
         self.parser.add_argument('--arch', default='dla_34',
                                  help='model architecture. Currently tested'
                                       'resnet_18 | resnet_101 | dla_34')
@@ -57,7 +57,7 @@ class opts(object):
         self.parser.add_argument('--num_epochs', type=int, default=30,
                                  help='total training epochs.')
 
-        # dataset seetings
+        # dataset settings
         self.parser.add_argument('--dataset', default='ucf101',
                                  help='ucf101 | hmdb')
         self.parser.add_argument('--split', type=int, default=1,

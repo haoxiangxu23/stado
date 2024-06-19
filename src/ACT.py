@@ -260,7 +260,8 @@ def frameAP_error(opt, redo=False):
     print('Error Analysis')
 
     print("")
-    print("{:20s} {:8s} {:8s} {:8s} {:8s} {:8s} {:8s}".format('label', '   AP   ', '  Loc.  ', '  Cls.  ', '  Time  ', ' Other ', ' missed '))
+    print("{:20s} {:8s} {:8s} {:8s} {:8s} {:8s} {:8s}".format('label', '   AP   ', '  Loc.  ', '  Cls.  ', '  Time  ',
+                                                              ' Other ', ' missed '))
     print("")
     for il, label in enumerate(dataset.labels):
         print("{:20s} ".format(label) + " ".join(["{:8.2f}".format(L[il]) for L in LIST]))
@@ -271,7 +272,6 @@ def frameAP_error(opt, redo=False):
 
 
 def videoAP(opt, print_info=True):
-
     th = opt.th
     model_name = opt.model_name
     split = 'val'
